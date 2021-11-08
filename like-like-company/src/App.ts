@@ -71,7 +71,7 @@ class App {
           cluster.fork();
         }
       } else {
-        this.app.listen(this.port, function(){
+        this.app.listen(this.port, ()=>{
           console.log(`pid : ${process.pid}\nmode: ${this.dev}\n${this.port} is connected`);
         }).on("error", err => {
           process.exit(1);

@@ -1,15 +1,21 @@
 import { Router, Request, Response } from "express";
+import { authDto, AuthService } from "./index";
 import { Controller } from "../../common/index";
 
-class AuthController implements Controller{
+export class AuthController implements Controller{
     path: string = '/auth';
     router: Router = Router();
+    errMessage: string;
+
+    constructor(
+        private readonly authService : AuthService
+    ){ this.initRoutes(); };
 
     initRoutes(){
         const route = Router();
 
-        route.post('/login',);
-        route.post('/join',);
+        route.post('/login',this.login);
+        route.post('/join',this.join);
 
         this.router.use(this.path,route);
     };
@@ -29,6 +35,13 @@ class AuthController implements Controller{
      * body         : name, email, password
      */
     async join(req:Request, res :Response){
-        
+        try{
+            const {name, email, password, grade} = req.body as authDto;
+
+            throw new Error('123');
+
+        }catch(e){
+            res.send('adsf');
+        }
     };
 };

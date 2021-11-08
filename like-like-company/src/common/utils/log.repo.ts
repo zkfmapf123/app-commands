@@ -1,7 +1,7 @@
 import logger from '../../lib/logger';
 import moment from 'moment';
 
-class LogRepository {
+export class LogRepository {
     private err : 'error' | 'info';
     private title : string;
     private description : string;
@@ -53,5 +53,3 @@ class LogRepository {
         }
     }
 };
-
-export default LogRepository;

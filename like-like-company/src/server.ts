@@ -1,12 +1,11 @@
-import { UserController } from "./api/users/user.controller";
-import { UserServiceBuilder } from "./api/users/user.service";
+import { AuthController, AuthService } from "./api/index";
 import App from "./App";
 import config from "./config";
 
 (async() => {
   const app = new App({
     controllers: [
-      new UserController()
+      new AuthController(new AuthService())
     ],
     port: +config.port,
     dev: config.dev as "dev" | "build"
