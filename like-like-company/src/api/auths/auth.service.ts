@@ -5,16 +5,40 @@ import { LogRepository, Service } from '../../common/index';
 import {DBRepo} from '../../lib/mysql.repo';
 
 export class AuthService extends Service implements ILogin, IJoin{
-    async getLogin({ email, password }: loginAuthDto): Promise<void> {
-        throw new Error('Method not implemented.');
-    };
 
-    async getUserInfoUseEmail(email: string): Promise<string> {
-        throw new Error('Method not implemented.');
+    async getUserInfoUseEmail(email: string): Promise<string | 'no email' | 'error'> {
+        try{
+            const [row] = await DBRepo.getResult({
+                query : 'select password from users where email = ?',
+                params : `${email}`
+            });
+
+            if(this.isDataEmpty(row)){
+                return 'no email';
+            };
+
+            return row[0].password;
+        }catch(e){
+            new LogRepository()
+            .setErrType('error')
+            .setDescription(e)
+            .setTitle('get user info use email')
+            .create();
+            throw new Error(e);
+        }
     };
 
     async isComparePassword(password: string, crpytoPassword: string): Promise<boolean> {
-        throw new Error('Method not implemented.');
+        try{
+            return (await bcrypt.compare(password, crpytoPassword));
+        }catch(e){
+            new LogRepository()
+            .setErrType('error')
+            .setDescription(e)
+            .setTitle('is compare password')
+            .create();
+            throw new Error(e);
+        } 
     };
 
     async createUser({ name, email, password, grade = '인턴' }: authDto): Promise<void> {
@@ -55,7 +79,7 @@ export class AuthService extends Service implements ILogin, IJoin{
             .setErrType('error')
             .setTitle('is unique email')
             .create();
-            return false;      
+            throw new Error(e);  
         }
     };
 
@@ -78,7 +102,7 @@ export class AuthService extends Service implements ILogin, IJoin{
             .setErrType('error')
             .setTitle('is unique name')
             .create();
-            return false;
+            throw new Error(e);
         }
     };
 
@@ -93,7 +117,7 @@ export class AuthService extends Service implements ILogin, IJoin{
             .setErrType('error')
             .setTitle('get crypo password')
             .create();
-            return undefined;
+            throw new Error(e);
         }
     };
 

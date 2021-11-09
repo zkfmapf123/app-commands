@@ -1,5 +1,5 @@
 import { Router, Request, Response } from "express";
-import { authDto, AuthService } from "./index";
+import { authDto, AuthService, loginAuthDto } from "./index";
 import { Controller, AcceptException, InternalServerError } from "../../common/index";
 import { sign } from "../../lib/index";
 
@@ -23,20 +23,39 @@ export class AuthController implements Controller{
 
     /**
      * url          : api/auth/login
-     * header       : token
-     * body         : email, password
+     * body 
+     *      - token       : token
+     *      - data        : email, password
      */
     login = async(req :Request, res :Response) =>{
-        
-        return res.status(200).json({
-            name : '123'
-        });
+        try{
+            const {email, password} = req.body.data as loginAuthDto;
+    
+            const brcyptPassword = await this.authService.getUserInfoUseEmail(email);
+            if(brcyptPassword === 'no email'){
+                return res.status(202).json(new AcceptException('이메일이 유효하지 않습니다'));
+            };
+
+            const isCorrect = await this.authService.isComparePassword(password, brcyptPassword);
+            if(!isCorrect){
+                return res.status(202).json(new AcceptException('비밀번호가 맞지 않습니다'));
+            };
+
+            const access_token = await sign(email);
+            
+            return res.status(200).json({
+                access_token
+            });
+        }catch(e){
+            return res.status(500).json(new InternalServerError('관리자에게 문의하세요'));
+        }
     };
 
     /**
      * url          : api/auth/join
-     * header       : token
-     * body         : name, email, password
+     * body 
+     *      token   : token
+     *      data    : name, email, password
      */
     join = async(req:Request, res :Response) =>{
         try{

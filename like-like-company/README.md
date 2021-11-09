@@ -6,10 +6,10 @@
 - Push : GCM, FCM reference 보자
 
 - todo
-    - [ ] auth
-        - [ ] jwt
-        - [ ] login
-        - [ ] join
+    - [o] auth
+        - [o] jwt
+        - [o] login
+        - [o] join
     - [ ] post
         - [ ] pagination
          

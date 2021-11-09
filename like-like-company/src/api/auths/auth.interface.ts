@@ -1,7 +1,6 @@
 import {authDto, loginAuthDto} from './index';
 
 export interface ILogin{
-    getLogin({email, password} : loginAuthDto) : Promise<void>;
     getUserInfoUseEmail(email: string) : Promise<string>;
     isComparePassword(password: string, crpytoPassword : string) : Promise<boolean>; 
 };

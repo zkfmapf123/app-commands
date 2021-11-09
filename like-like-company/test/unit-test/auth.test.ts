@@ -4,16 +4,21 @@ import { deleteUserUseEmail } from '../setup';
 const authService = new AuthService();  
 
 describe('로그인 테스트',()=>{
-    test('이메일을 이용하여 정보를 가져온다',()=>{
-                
+    test('이메일을 이용하여 정보를 가져온다',async()=>{
+        const password = await authService.getUserInfoUseEmail('zkfmapf123@naver.com');
+        expect(password).not.toBe('no email');
+        expect(password).not.toBe('error');
     });
     
-    test('두개의 비밀번호를 비교한다. 맞음',()=>{
-    
-    });
-    
-    test('두개의 비밀번호를 비교한다. 맞지 않는다',()=>{
-    
+    test('두개의 비밀번호를 비교한다. 맞음',async()=>{
+        const password = await authService.getUserInfoUseEmail('zkfmapf123@naver.com');
+        const isComparePassword = await authService.isComparePassword('1234', password);
+        expect(isComparePassword).toBeTruthy();
+    })
+    test('두개의 비밀번호를 비교한다. 맞지 않는다',async()=>{   
+        const password = await authService.getUserInfoUseEmail('zkfmapf123@naver.com');
+        const isComparePassword = await authService.isComparePassword('123', password);
+        expect(isComparePassword).toBeFalsy();
     });
 });
 
