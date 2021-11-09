@@ -6,6 +6,7 @@ import os from "os";
 import cluster from "cluster";
 import { Controller } from "./common/interfaces/controller";
 import {csrf, verifyJsonWebToken, errMiddleware} from './middleware/index';
+import morgan from 'morgan';
 
 type appType = {
   controllers: Controller[];
@@ -35,6 +36,7 @@ class App {
   };
 
   initMiddleware(){
+    this.app.use(morgan('tiny'));
     this.app.use(helmet());
     this.app.use(express.json());
     this.app.use(express.urlencoded({ extended: false }));

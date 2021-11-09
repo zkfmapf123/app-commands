@@ -4,7 +4,7 @@ export type authDto = {
     name : string;
     email :string;
     password : string;
-    grade : gradeType;
+    grade ?: gradeType;
 };
 
 export type loginAuthDto = Pick<authDto, 'email' | 'password'>;

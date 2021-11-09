@@ -1,4 +1,5 @@
 import {AuthService} from '../../src/api/index';
+import { deleteUserUseEmail } from '../setup';
 
 const authService = new AuthService();  
 
@@ -42,7 +43,29 @@ describe('회원가입 테스트',()=>{
         const hashingPassword= await authService.getCryptoPassword(password);
         expect(hashingPassword).not.toBeUndefined();
     });
-})
+});
+
+describe('create uset test',()=>{
+    test('유저를 만든다',async()=>{
+        const email = 'asdf@naver.com';
+        const name = '이동규스';
+        const password = '123';
+        try{
+            await authService.createUser({
+                name : name,
+                email : email,
+                password :password
+            });
+        }catch(e){
+            console.error(e);
+        };
+    });
+
+    afterAll(async()=>{
+        await deleteUserUseEmail('asdf@naver.com');
+    })
+});
+
 
 
 

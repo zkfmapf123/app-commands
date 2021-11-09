@@ -19,10 +19,20 @@ export class AuthService extends Service implements ILogin, IJoin{
 
     async createUser({ name, email, password, grade = '인턴' }: authDto): Promise<void> {
         try{
-            
-            throw new Error('wer');
+            await DBRepo.getResult({
+                query : 'insert into users(name, email, password, grade) values(?,?,?,?)',
+                params: `${name},
+                         ${email},
+                         ${password},
+                         ${grade}`
+            });
         }catch(e){
-            throw new Error('er');
+            new LogRepository()
+            .setErrType('error')
+            .setDescription(e)
+            .setTitle('create user')
+            .create();
+            throw new Error(e);
         }   
     };
 
