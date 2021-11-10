@@ -1,5 +1,5 @@
-import { Router } from "express";
-import { Controller } from "../../common/index";
+import { Request, Response, Router } from "express";
+import { Controller, InternalServerError } from "../../common/index";
 
 class PostController implements Controller{
     path: string = '/post'
@@ -7,9 +7,8 @@ class PostController implements Controller{
     errMessage: string = undefined;
 
     constructor(){
-
+        this.initRoutes();
     };
-
     initRoutes(){
         const router = Router();
 
@@ -27,8 +26,12 @@ class PostController implements Controller{
      *     token    : token
      */    
 
-    pagination = async() =>{
+    pagination = async(req : Request, res :Response) =>{
+        try{
 
+        }catch(e){
+            return res.status(500).json(new InternalServerError());
+        }
     };
 
     /**
@@ -38,8 +41,12 @@ class PostController implements Controller{
      *     data     : title, description
      */
 
-    create = async() =>{
+    create = async(req: Request, res :Response) =>{
+        try{
 
+        }catch(e){
+            return res.status(500).json(new InternalServerError());
+        }
     };
 
     /**
@@ -48,8 +55,12 @@ class PostController implements Controller{
      *     token    : token
      *     data     : title, description
      */
-    update = async() =>{
+    update = async(req:Request, res:Response) =>{
+        try{
 
+        }catch(e){
+            return res.status(500).json(new InternalServerError());
+        }
     };
 
     /**
@@ -57,7 +68,11 @@ class PostController implements Controller{
      * body
      *     token    : token
      */
-    delete = async() =>{
+    delete = async(req:Request, res :Response) =>{
+        try{
 
+        }catch(e){
+            return res.status(500).json(new InternalServerError());
+        }
     };
 }
