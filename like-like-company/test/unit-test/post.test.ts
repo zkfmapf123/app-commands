@@ -2,12 +2,16 @@ import {PostService} from '../../src/api/posts/index';
 const postService : PostService = new PostService();
 
 describe('pagination test',()=>{
-
-    test('pagination 0 ~ 10',async()=>{
-
+    
+    test('모든 게시글의 총수를 가져온다',()=>{
+    
     });
 
-    test('pagination end-1 ~ 10',async()=>{
+    test('offset이 넘으면 0번으로 이동한다',()=>{
+        
+    });
+
+    test('해당 limit, offset에 맞는 게시글을 가져온다',async()=>{
 
     });
 });

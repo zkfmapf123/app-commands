@@ -3,7 +3,9 @@ import { CreatePostDto, DeletePostDto, ReadPostDto, UpdatePostDto } from "./inde
 
 export interface IRead{
     getPagination({limit, offset} : ReadPostDto) : Promise<any>;
-    checkPaginationNumber({limit, offset} : ReadPostDto) :Promise<[number, number]>;
+    getAllPostCounts() : Promise<number>;
+    formatPaginationNumber({limit, offset} : ReadPostDto, postCount : number) : Promise<ReadPostDto> 
+
 };
 
 export interface ICreate{

@@ -5,7 +5,14 @@ import { ICreate, IDelete, IRead, IUpdate, CreatePostDto, UpdatePostDto, DeleteP
 
 export class PostService implements ICreate, IUpdate, IDelete, IRead{
     
-    
+    async getAllPostCounts(): Promise<number> {
+        throw new Error("Method not implemented.");
+    };
+
+    async formatPaginationNumber({ limit, offset }: ReadPostDto, postCount: number): Promise<ReadPostDto> {
+        throw new Error("Method not implemented.");
+    };
+
     async isPossibleCreate(grade: gradeType, currentArticles: number): Promise<boolean> {
         try{
             const isGradeNumber= RankMap.get(grade);
