@@ -1,0 +1,72 @@
+2021-11-12 15:55:21 (error) => 
+                    title : get pagination,
+                    description : Error: Error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '[object Promise]' at line 1,
+                    user : undefined,
+                    date : November 12th 2021, 3:55:21 pm
+                
+2021-11-12 15:55:39 (error) => 
+                    title : get pagination,
+                    description : Error: Error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '[object Promise]' at line 1,
+                    user : undefined,
+                    date : November 12th 2021, 3:55:39 pm
+                
+2021-11-12 16:26:22 (error) => 
+                    title : get pagination,
+                    description : Error: Error: Undeclared variable: NaN,
+                    user : undefined,
+                    date : November 12th 2021, 4:26:22 pm
+                
+2021-11-12 16:27:09 (error) => 
+                    title : get pagination,
+                    description : Error: Error: Undeclared variable: NaN,
+                    user : undefined,
+                    date : November 12th 2021, 4:27:09 pm
+                
+2021-11-12 16:28:19 (error) => 
+                    title : get pagination,
+                    description : Error: Error: Undeclared variable: NaN,
+                    user : undefined,
+                    date : November 12th 2021, 4:28:19 pm
+                
+2021-11-12 16:28:25 (error) => 
+                    title : get pagination,
+                    description : Error: Error: Undeclared variable: NaN,
+                    user : undefined,
+                    date : November 12th 2021, 4:28:25 pm
+                
+2021-11-12 16:28:54 (error) => 
+                    title : get pagination,
+                    description : Error: Error: Undeclared variable: NaN,
+                    user : undefined,
+                    date : November 12th 2021, 4:28:54 pm
+                
+2021-11-12 16:29:33 (error) => 
+                    title : get pagination,
+                    description : Error: Error: Undeclared variable: NaN,
+                    user : undefined,
+                    date : November 12th 2021, 4:29:33 pm
+                
+2021-11-12 16:29:52 (error) => 
+                    title : get pagination,
+                    description : Error: Error: Undeclared variable: NaN,
+                    user : undefined,
+                    date : November 12th 2021, 4:29:52 pm
+                
+2021-11-12 16:31:29 (error) => 
+                    title : get pagination,
+                    description : Error: Error: Undeclared variable: NaN,
+                    user : undefined,
+                    date : November 12th 2021, 4:31:29 pm
+                
+2021-11-12 16:32:26 (error) => 
+                    title : get pagination,
+                    description : Error: Error: Undeclared variable: NaN,
+                    user : undefined,
+                    date : November 12th 2021, 4:32:26 pm
+                
+2021-11-12 16:32:52 (error) => 
+                    title : get pagination,
+                    description : Error: Error: Undeclared variable: NaN,
+                    user : undefined,
+                    date : November 12th 2021, 4:32:52 pm
+                

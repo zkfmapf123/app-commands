@@ -11,7 +11,7 @@ export interface JwyPayloadType{
 
 const jwtOption : jwt.SignOptions = {
   algorithm : 'HS256',
-  expiresIn : '10s',
+  expiresIn : '30d',
   issuer:'like-like-company'
 };
 

@@ -1,11 +1,8 @@
 import { gradeType } from "../index";
-import { CreatePostDto, DeletePostDto, ReadPostDto, UpdatePostDto } from "./index";
+import { PaginationUnionType,CreatePostDto, DeletePostDto, ReadPostDto, UpdatePostDto } from "./index";
 
 export interface IRead{
-    getPagination({limit, offset} : ReadPostDto) : Promise<any>;
-    getAllPostCounts() : Promise<number>;
-    formatPaginationNumber({limit, offset} : ReadPostDto, postCount : number) : Promise<ReadPostDto> 
-
+    getPagination({limit, offset} : ReadPostDto) : Promise<PaginationUnionType>;
 };
 
 export interface ICreate{

@@ -6,7 +6,6 @@ import { sign } from "../../lib/index";
 export class AuthController implements Controller{
     path: string = '/auth';
     router: Router = Router();
-    errMessage: string = undefined;
 
     constructor(
         private readonly authService : AuthService
@@ -62,14 +61,12 @@ export class AuthController implements Controller{
             const {name, email, password, grade = '인턴'} = req.body.data as authDto;
             const isEmail = await this.authService.isUniqueEmail(email);
             if(!isEmail){
-                this.errMessage = '이미 존재하는 이메일 입니다';
-                throw new Error(this.errMessage);
+                return res.status(202).json(new AcceptException('이미 존재하는 이메일 입니다'));
             };
 
             const isName = await this.authService.isUniqueName(name);
             if(!isName){
-                this.errMessage = '이미 존재하는 이름입니다';
-                throw new Error(this.errMessage);
+                return res.status(202).json(new AcceptException('이미 존재하는 이름입니다'));
             }
 
             const bcryptPassword = await this.authService.getCryptoPassword(password);
@@ -86,11 +83,7 @@ export class AuthController implements Controller{
             });
 
         }catch(e){
-            if(this.errMessage === undefined){
-                return res.json(new InternalServerError());
-            };
-
-            return res.status(204).json(new AcceptException(this.errMessage));
+            return res.status(500).json(new InternalServerError('관리자에게 문의하세요'));
         }
     };
 };

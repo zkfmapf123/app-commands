@@ -11,10 +11,10 @@
         - [o] login
         - [o] join
     - [ ] post
-        - [ ] pagination
-            - [ ] recently
+        - [o] pagination
+            - [o] recently
             - [ ] good
-        - [ ] create
+        - [o] create
         - [ ] update
         - [ ] delete
          

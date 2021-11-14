@@ -1,12 +1,17 @@
 import { Request, Response, Router } from "express";
-import { Controller, InternalServerError } from "../../common/index";
+import {verify} from '../../lib/index';
+import { AcceptException, Controller, InternalServerError } from "../../common/index";
+import { PostService } from './index';
+import { gradeType } from "../index";
 
-class PostController implements Controller{
+export class PostController implements Controller{
     path: string = '/post'
     router: Router = Router();
     errMessage: string = undefined;
 
-    constructor(){
+    constructor(
+        private readonly postService : PostService
+    ){
         this.initRoutes();
     };
     initRoutes(){
@@ -28,6 +33,20 @@ class PostController implements Controller{
 
     pagination = async(req : Request, res :Response) =>{
         try{
+            const {limit, offset, order} = req.query;
+    
+            const {posts, postLimit, postOffset} = await this.postService.getPagination({
+                limit : +limit,
+                offset :+offset,
+                rand : 'recenlty'
+            });
+
+            return res.status(200).json({
+                posts,
+                isUpdate : (+offset === postOffset) ? false :true,
+                offset : postOffset,
+                limit : postLimit
+            })
 
         }catch(e){
             return res.status(500).json(new InternalServerError());
@@ -43,7 +62,23 @@ class PostController implements Controller{
 
     create = async(req: Request, res :Response) =>{
         try{
+            const [token, error] = verify(req.body.token);
+            const {id} = token;
+            const {title, description} = req.body.data;
 
+            const [userGrade, gradeCount] = await this.postService.getGrade(id);
+            const isCreate = await this.postService.isPossibleCreate(userGrade, gradeCount);
+            if(!isCreate){
+                return res.status(202).json(new AcceptException('더이상 글을 쓸수 없습니다'));
+            };
+
+            await this.postService.createPost({
+                id : id,
+                title : title,
+                description: description
+            });
+
+            return res.status(200).json({});
         }catch(e){
             return res.status(500).json(new InternalServerError());
         }
